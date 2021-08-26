@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Hexo</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/study_notes.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
+  
+  
+  
+<link rel="stylesheet" href="/study_notes.github.io/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/study_notes.github.io/css/style.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/study_notes.github.io/js/fancybox/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/study_notes.github.io/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+        <script src="/study_notes.github.io/js/valine/av-min@3.0.4.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  
+  <!-- 依赖于jquery和vue -->
+  <script src="/study_notes.github.io/js/jquery3.5.1.js"></script>
+  <script src="/study_notes.github.io/js/vue2.6.11.js"></script>
+  
+  <body>
+    <!-- 预加载动画 -->
+    <!-- 页面预加载动画 -->
+
+<div id='loader'>
+  <link rel="stylesheet" href="/study_notes.github.io/js/loaded/index.css" >
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+    <div class="loading-word">loading...</div>
+  </div>
+</div>
+
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+  
+</script>
+
+    
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 头部导航等 -->
+    
+<header class="header " id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo" src="/study_notes.github.io/medias/logo.png" alt="logo">
+      <h3 class="drawer-box-head_title">Hexo</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+              <i class="fa fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/study_notes.github.io/medias/logo.png" alt="logo">
+        </div>
+      
+      <a href="/study_notes.github.io/" class="logo">Hexo</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <!-- <div class="close" style="overflow: hidden;">
+          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
+        </div> -->
+        <h2>
+          <span>
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fa fa-close close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/study_notes.github.io/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/study_notes.github.io/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+
+    <!-- 当头部导航设置为背景透明的时候  -->
+    
+      <script src="/study_notes.github.io/js/header/index.js" data-pjax></script>
+    
+</header>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+    function loadScript(src, cb) {
+        setTimeout(function () {
+            var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+            var script = document.createElement('script');
+            script.setAttribute('type', 'text/javascript');
+            if (cb) script.onload = cb;
+            script.setAttribute('src', src);
+            HEAD.appendChild(script);
+        });
+    }
+
+    //https://github.com/filamentgroup/loadCSS
+    var loadCSS = function (href, before, media, attributes) {
+        var doc = window.document;
+        var ss = doc.createElement("link");
+        var ref;
+        if (before) {
+            ref = before;
+        }
+        else {
+            var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+            ref = refs[refs.length - 1];
+        }
+        var sheets = doc.styleSheets;
+        if (attributes) {
+            for (var attributeName in attributes) {
+                if (attributes.hasOwnProperty(attributeName)) {
+                    ss.setAttribute(attributeName, attributes[attributeName]);
+                }
+            }
+        }
+        ss.rel = "stylesheet";
+        ss.href = href;
+        ss.media = "only x";
+        function ready(cb) {
+            if (doc.body) {
+                return cb();
+            }
+            setTimeout(function () {
+                ready(cb);
+            });
+        }
+        ready(function () {
+            ref.parentNode.insertBefore(ss, (before ? ref : ref.nextSibling));
+        });
+        var onloadcssdefined = function (cb) {
+            var resolvedHref = ss.href;
+            var i = sheets.length;
+            while (i--) {
+                if (sheets[i].href === resolvedHref) {
+                    return cb();
+                }
+            }
+            setTimeout(function () {
+                onloadcssdefined(cb);
+            });
+        };
+        function loadCB() {
+            if (ss.addEventListener) {
+                ss.removeEventListener("load", loadCB);
+            }
+            ss.media = media || "all";
+        }
+        if (ss.addEventListener) {
+            ss.addEventListener("load", loadCB);
+        }
+        ss.onloadcssdefined = onloadcssdefined;
+        onloadcssdefined(loadCB);
+        return ss;
+    };
+    
+</script>
+ 
+
+<!-- 轮播图所需要的js -->
+<script src="/study_notes.github.io/js/swiper/swiper.min.js"></script>
+<script src="/study_notes.github.io/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/study_notes.github.io/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+
+  <script src="/study_notes.github.io/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/study_notes.github.io/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+
+
+    <!-- 内容区域 -->
+    <div id="safearea">
+      <main class="main" id="pjax-container" style="margin-top: 0;">
+        
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+<!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/study_notes.github.io/medias/1.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fa fa-calendar"></i> Published in：2021-07-19 |
+        </span>
+      
+
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/study_notes.github.io/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      <div class="post-content">
+        <h1 id="chrome调试技巧"><a href="#chrome调试技巧" class="headerlink" title="chrome调试技巧"></a>chrome调试技巧</h1><ol>
+<li><strong>debugger</strong></li>
+</ol>
+<blockquote>
+<p>js代码停止在相应的位置</p>
+</blockquote>
+<ol start="2">
+<li><strong>console.table</strong></li>
+</ol>
+<blockquote>
+<p>将对象打印成一个表格</p>
+</blockquote>
+<ol start="3">
+<li><strong>console.time()</strong></li>
+</ol>
+<blockquote>
+<p>和console.endTime()联合使用测试代码运行时间</p>
+</blockquote>
+<ol start="4">
+<li><strong>console.trace</strong></li>
+</ol>
+<blockquote>
+<p>获取函数执行时栈的追踪</p>
+</blockquote>
+<ol start="5">
+<li><strong>monitor</strong></li>
+</ol>
+<blockquote>
+<p>追踪函数，每次调用函数时输出函数名和调用的参数</p>
+</blockquote>
+<h1 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h1><ol>
+<li>React官网</li>
+</ol>
+<blockquote>
+<p>(<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/">https://zh-hans.reactjs.org/</a>)</p>
+</blockquote>
+<ol start="2">
+<li>vscode的react插件：</li>
+</ol>
+<blockquote>
+<p> 用于简化react代码的编写<img "" class="lazyload placeholder" data-original="C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427203139207.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="image-20210427203139207"></p>
+<p><img "" class="lazyload placeholder" data-original="C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427203549665.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="image-20210427203549665"></p>
+</blockquote>
+<ol start="3">
+<li>google前端助手插件</li>
+</ol>
+<blockquote>
+<p>FeHelper: 用于格式化JSON数据格式</p>
+</blockquote>
+<ol start="4">
+<li>axios(详细请看四小时快速上手文档)</li>
+</ol>
+<blockquote>
+<p>ajax请求库，用于在React中请求后端数据</p>
+<p>引入方式：</p>
+<blockquote>
+<p>第一种：CDN在线引入</p>
+<p>第二种：npm i axios命令下载到当前文件夹下，然后通过import引入</p>
+</blockquote>
+</blockquote>
+<ol start="5">
+<li>react的UI组件库</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ant.design/index-cn">蚂蚁金服的</a></p>
+<p>引入方式：<code>npm install antd</code></p>
+</blockquote>
+<h1 id="小知识点补充"><a href="#小知识点补充" class="headerlink" title="小知识点补充"></a>小知识点补充</h1><ol>
+<li><strong>解构赋值+重命名</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;a: &#123;b: 1&#125;&#125;</span><br><span class="line">const &#123;a&#125; = obj;</span><br><span class="line">const &#123;a: &#123;b&#125;&#125; = obj;</span><br><span class="line">const &#123;a: &#123;b: value&#125;&#125; = obj;//解构出并将b重命名为value</span><br><span class="line"></span><br><span class="line">console.log(a) //&#123;b:1&#125;</span><br><span class="line">console.log(b) //&#123;1&#125;</span><br><span class="line">console.log(value) //&#123;1&#125;</span><br><span class="line">//数组解构赋值</span><br><span class="line">let arr = [1,2];</span><br><span class="line">const [a,b] = arr;</span><br><span class="line">console.log(a,b); //1,2</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>fetch请求</strong></li>
+</ol>
+<blockquote>
+<p>和XMLHttpRequest()类似，可以向后端请求数据</p>
+<p>why fetch：</p>
+<ul>
+<li>基于promise封装</li>
+<li>符合关注分离原则(一种模式)</li>
+</ul>
+</blockquote>
+<p>最佳实践：</p>
+<p>promise</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fetch(url).then(<span class="function"><span class="params">response</span> =&gt;</span> response.json())</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">console</span>.log(data))</span><br><span class="line">  .catch(<span class="function"><span class="params">e</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&quot;Oops, error&quot;</span>, e))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 首先fetch和服务器连接成功则调用then方法 失败则调用catch方法</span></span><br><span class="line"><span class="comment">// 连接成功后通过response原型上的json方法获取带有数据的promise对象</span></span><br><span class="line"><span class="comment">// 在通过then方法获取数据</span></span><br><span class="line"><span class="comment">// 两个then应该有两个catch方法，但错误应该只处理一次然后结束，所以catch写在最后</span></span><br><span class="line"><span class="comment">// 无论是哪个then失败了都会调用最后的catch方法并结束调用</span></span><br></pre></td></tr></table></figure>
+
+<p>async和awiat</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">myFetch</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(url);</span><br><span class="line">      <span class="keyword">let</span> data = <span class="keyword">await</span> response.json();</span><br><span class="line">      <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;Oops, error&quot;</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 通过try和catch获取promise的reject错误</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：</p>
+<blockquote>
+<p>(<a target="_blank" rel="noopener" href="https://github.github.io/fetch/">https://github.github.io/fetch/</a>)</p>
+<p>(<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000003810652">https://segmentfault.com/a/1190000003810652</a>)</p>
+</blockquote>
+<h1 id="vue和react的比较"><a href="#vue和react的比较" class="headerlink" title="vue和react的比较"></a>vue和react的比较</h1><p>组件化方式不同：</p>
+<blockquote>
+<ol>
+<li>vue通过 <code>.vue</code>文件，来创建相应的组件<ul>
+<li>template  结构</li>
+<li>script  组件</li>
+<li>style  样式</li>
+</ul>
+</li>
+<li>react中有组件化的概念，但没有组件模块文件，react中一切都是以JS来表现的</li>
+</ol>
+</blockquote>
+<h1 id="React概览"><a href="#React概览" class="headerlink" title="React概览"></a>React概览</h1><p>核心思想：</p>
+<blockquote>
+<p>封装组件  (各个组件维护自己的状态和UI  当状态改变后自动更新组件)</p>
+</blockquote>
+<p>React概念组成：</p>
+<ul>
+<li>组件</li>
+<li>JSX  (JS支持HTML的嵌入)</li>
+<li>Virtual DOM </li>
+<li>Data Flow (单向数据绑定)</li>
+</ul>
+<h1 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h1><p>全称：</p>
+<blockquote>
+<p>Javascript XML</p>
+</blockquote>
+<p>语法：</p>
+<ul>
+<li>定义虚拟DOM时不需要用引号</li>
+<li>标签必须闭合，即必须有<code>/</code></li>
+<li>通过{}在JSX标签中混入JS<em><strong>表达式</strong></em>(不能识别<em><strong>语句</strong></em>)</li>
+<li>样式的类名用className代替class(因为class是ES的关键字)</li>
+<li>通过<code>&#123;&#123;&#125;&#125;`写入内联样式(外层&#123;&#125;表示内层是JS表达式，识别内层`&#123;&#125;`为JS对象)
+* 只能有一个根标签
+* 标签首字母
+  1. 若小写字母开头，则直接转换成同名的html标签
+  2. 若大写字母开头，则渲染相应的组件
+
+语句和表达式区别：
+
+> 表达式有返回值  语句没有 
+>
+> **特殊：**JSX中可以自动遍历数组内的内容，但无法遍历对象内的内容
+
+# React简单开始
+
+步骤：
+
+* 写入原生html作为容器
+* 引入React核心库、React-DOM库和Babel库 （ 核心库需要在DOM库之前引入 ，且核心库和DOM库分别引入了**React和ReactDOM全局对象**）
+* 引入babel类型的script标签  
+* 创建虚拟DOM
+* 渲染虚拟DOM
+
+代码：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 准备好一个“容器” --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;!-- 引入react核心库 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/react@17/umd/react.development.js&quot;</span> <span class="attr">crossorigin</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;!-- 引入react-dom，用于支持react操作DOM --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/react-dom@17/umd/react-dom.development.js&quot;</span> <span class="attr">crossorigin</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;!-- 引入babel，用于将JSX转换为js --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/babel-standalone@6/babel.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;!--引入prop-type库  定义组件的props传入数据的类型限制  --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/prop-types@15.6/prop-types.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/babel&quot;</span>&gt;</span><span class="javascript">  <span class="comment">/*此处一定要写label*/</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// 创建虚拟DOM</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> VDOM = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello,React<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;  <span class="comment">/*此处不需要加引号*/</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// 渲染虚拟DOM</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    ReactDOM.render(VDOM, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));  </span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+# 虚拟DOM的两种创建方式
+
+通过原生的js代码
+
+> 通过React.createElement(标签名，属性集合，内容字符串)
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> VDOM = React.createElement(<span class="string">&#x27;h1&#x27;</span>,&#123;<span class="attr">id</span>:<span class="string">&#x27;title&#x27;</span>&#125;, <span class="string">&#x27;Hello React&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+通过JSX语法
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> VDOM = <span class="xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Hello,React<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+* 创建多行DOM (通过括号实现格式化创建)
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> VDOM = (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello,React<span class="tag">&lt;/<span class="name">span</span>&gt;</span>    </span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">        ) </span><br></pre></td></tr></table></figure>
+
+比较：
+
+> JSX语法创建虚拟DOM相当于原生创建虚拟DOM的语法糖  
+
+# 动态渲染列表
+
+> 利用JSX语法可以自动遍历数组
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;Vue&#x27;</span>, <span class="string">&#x27;React&#x27;</span>, <span class="string">&#x27;Auge&#x27;</span>];</span><br><span class="line"><span class="keyword">const</span> VDOM = (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;</span></span><br><span class="line"><span class="xml">                arr.map((v, i)=&gt;&#123;</span></span><br><span class="line"><span class="xml">                    return <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span>&#123;v&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                &#125;)  //arr.map()函数有返回值，是表达式</span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">) </span><br><span class="line">ReactDOM.render(VDOM, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+#### key值的作用
+
+作用：
+
+> 用于标识虚拟DOM中的标签，便于标签的复用
+
+如果不引入key:
+
+> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//旧的dom</span></span><br><span class="line">&lt;ul&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"><span class="comment">//新的dom</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Connecticut<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+>
+> 上述情况发生后，React无法识别Duke和Villanova没有改变可以复用，实际上会修改Duke  ---->  Connecticut ; Villanova---->  Duke  并创建新的节点<li>Villanova</li>，效率不高
+
+引入key：
+
+> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2015&quot;</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2016&quot;</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2014&quot;</span>&gt;</span>Connecticut<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2015&quot;</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2016&quot;</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+>
+> 保留Duke和Villanova，只创建了新的Conecticut，提高了效率
+
+补充：
+
+> 用index作为key值的隐患：
+>
+> * 对数组不在数组的末尾进行添加和删除，打乱了后续元素的index导致
+>   1.   页面显示没有问题，但效率变低
+>   2.   如果出现了表单元素则页面显示也可能出现问题
+>
+> 例子：
+>
+> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    state = &#123;</span><br><span class="line">        <span class="attr">person</span>: [</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;小张&#x27;</span>, <span class="attr">age</span>: <span class="number">10</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">&#x27;小李&#x27;</span>, <span class="attr">age</span>: <span class="number">11</span>&#125;</span><br><span class="line">        ]    </span><br><span class="line">    &#125;</span><br><span class="line">    myAdd = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> p = &#123;<span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">&#x27;小王&#x27;</span>, <span class="attr">age</span>: <span class="number">20</span>&#125;;</span><br><span class="line">        <span class="keyword">const</span> &#123;person&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">        person.unshift(p);</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;person&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.myAdd&#125;</span>&gt;</span>添加小王<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    &#123;</span></span><br><span class="line"><span class="xml">                        this.state.person.map((v,i)=&gt;&#123;</span></span><br><span class="line"><span class="xml">                            return <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">                                        &#123;v.name&#125;====&#123;v.age&#125;</span></span><br><span class="line"><span class="xml">                                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">                                    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                        &#125;)</span></span><br><span class="line"><span class="xml">                    &#125;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">ul</span>&gt;</span>    </span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Person</span>/&gt;</span></span>, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+>
+> 解释：由于出现了表单元素导致页面显示也出现了问题。错把小张的 input给了小王
+
+
+
+# React中的DOM差异
+
+> React 实现了一套独立于浏览器的 DOM 系统，**兼顾了性能和跨浏览器的兼容性**。我们借此机会**完善了浏览器 DOM 实现的一些特殊情况**。
+
+* 标签属性命名
+
+> React中所有的html属性都是小驼峰命名的，例外的情况是 `aria-*` 以及 `data-*` 属性，都用小写
+
+* checked
+
+> 当input类型是checkbox或radio时使用。
+>
+> 当设置后只能通过onChange事件改变标签是否被选中而不能直接通过点击改变标签是否选中(不同于普通的checked属性，因为React会将其设置为read-only)
+>
+> 也可以通过defaultChecked设置是否被选中，但此属性只执行一次，及只有在初始化的时候起作用，后面如果改变defaultChecked的值也无法改变是否选中，一般用于非受控组件
+
+* className
+
+> 由于和关键字class冲突，将class属性变为className
+
+* onchange
+
+> 实现类似于原生oninput事件
+
+* selected
+
+> 原生select选择标签中option的selected属性不被React推荐，通过在select标签上设置value属性代替，使select能和其他表单组件有相似的操作，通过value获取表单的值
+>
+> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">value</span>=<span class="string">&#123;</span>&#x27;<span class="attr">1</span>&#x27;&#125;&gt;</span>  //默认选择第二个option</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span>a<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> &gt;</span>b<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+>
+>   
+
+* style
+
+> React中通过对象给strle赋值而不是原生中通过字符串
+>
+> 注意：React会自动在内联样式的数字后面添加px单位，如果不同px单位请将数位和单位设置为字符串形式
+>
+> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Result style: &#x27;10px&#x27;</span></span><br><span class="line">&lt;div style=&#123;&#123; <span class="attr">height</span>: <span class="number">10</span> &#125;&#125;&gt;</span><br><span class="line">  Hello World!</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Result style: &#x27;10%&#x27;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> &#x27;<span class="attr">10</span>%&#x27; &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="xml">  Hello World!</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+>
+>   
+
+* value
+
+> 类似checked，受控组件用value设置默认值，非受控组件利用defaultValue设置默认值。
+> 且checked设置后表单标签被设置为read-only，只能通过onChange事件该表值
+
+
+
+# React组件开发
+
+> 组件必须以大写字母开头
+
+#### 函数式组件
+
+> 适用：
+>
+> > 适用于简单组件；如果组件只有render方法和props，没有state则可以使用函数式组件
+>
+> 使用：
+>
+> > 以大写字母开头的标签使用
+>
+> 函数内的this指向undefined，因为JSX语法被babel翻译后开启了严格模式
+>
+> 代码：
+>
+> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是函数式组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span>/&gt;</span></span>, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+补充：
+
+> 从React16.8.0以后的版本引入的Hooks特性，函数也可以拥有state状态(正常来说因为函数this指向undefined所以没有state)
+>
+> 1. **React.useState()**
+>
+> > React包中的useState方法
+> >
+> > 参数：[初始状态值]; 一个
+> >
+> > 返回值: [状态值, 函数]
+> >
+> > 形式：`const [xxxx, setXxxx]=React.useState(initValue)`
+> >
+> > * 返回的函数用于更新状态(**两种方式**)
+> >
+> >   > 参数：新的状态值或回调函数
+> >   >
+> >   > 如果是函数，则状态值作为参数
+> >
+> > 例子：
+> >
+> > <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Demo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = React.useState(<span class="number">0</span>);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// setCount(count+1); //新的状态值作为参数</span></span><br><span class="line">        setCount(<span class="function"><span class="params">c</span>=&gt;</span>c+<span class="number">1</span>); <span class="comment">//回调函数作为参数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>等于：&#123;count&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;add&#125;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+> >
+> > **注意：**每次更新状态值后都会重新调用函数，由于React底层的处理，React.useState方法后面不会再更新初始值(否则会没执行一次后将count改为0) 
+>
+> 2. **React.useEffent**
+>
+> ![image-20210502104506256](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210502104506256.png)
+>
+> 	>**重点: **useEffect函数的第二个参数指定检测哪个state的改变，只有对应状态改变后触发的更新才会调用前面的函数
+>
+> 例子：
+>
+> <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [count, setCount] = React.useState(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">const</span> [name, setName] = React.useState(<span class="string">&#x27;Jack&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setCount(<span class="function"><span class="params">c</span>=&gt;</span>c+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setName(<span class="string">&#x27;Zhang&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">React.useEffect(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;@&#x27;</span>); <span class="comment">//只在第一次调用函数和更新count的时候打印</span></span><br><span class="line">&#125;,[count])</span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>等于：&#123;count&#125;----&#123;name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;add&#125;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;change&#125;</span>&gt;</span>改名<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+>
+> 3. **React.createRef()**
+>
+>  和类中的React.createRef()一样
+>
+> 例子：
+>
+> <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取输入框</span></span><br><span class="line"><span class="keyword">const</span> myRef = React.createRef();</span><br><span class="line"><span class="keyword">const</span> [content, setCont] = React.useState(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="comment">//显示输入</span></span><br><span class="line"><span class="keyword">const</span> show = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> con = myRef.current.value;</span><br><span class="line">    setCont(con);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;myRef&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;show&#125;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>显示内容：&#123;content&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+>
+> 
+
+
+
+#### 类式组件
+
+> 适用：
+>
+> > 复杂组件
+>
+> 使用：
+>
+> > 以大写字母开头的标签使用
+>
+> 定义：
+>
+> > 定义React.Component类的子类  并定义原型方法render()  供实例调用
+>
+> 代码：
+>
+> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是类组件 使用于复杂组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+>
+>   
+
+补充：
+
+> 有无状态分别对应着复杂组件和简单组件
+
+#### 类组件的constructor函数
+
+> 写和不写的区别：
+>
+> > 如果写则必须将props属性传入super，否则组件实例可能没有props属性
+> >
+> > <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">constructor</span> (<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="built_in">super</span>();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;constructor&#x27;</span>,<span class="built_in">this</span>.props); <span class="comment">//constructor undefined</span></span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+> >
+> >  
+>
+> 构造函数一般用于以下两种情况：(都可以绕过constructor实现)
+>
+> - 通过给 `this.state` 赋值对象来初始化内部 state
+> - 为事件处理函数的this绑定到组件实例(通过bind方法)
+
+#### 组件的render函数
+
+> 初始化的时候调用一次
+>
+> 此后只要组件的state或props变化就调用一次render
+
+# FragMent组件
+
+> Fragments 允许你将子列表分组，而无需向 DOM 添加额外节点
+
+使用：
+
+> * 从React包中引入组件FragMent
+> * `<Fragment></Fragment>`或 `<></>`
+>
+> **注意**：Fragment只支持key属性，但它的简写形式`<></>`不支持key
+
+# 组件的三大属性
+
+来源：
+
+> 通过继承React.Component类获得，作为**实例属性**
+
+#### state
+
+作用：
+
+> 保存组件的**内部**状态数据
+
+使用：
+
+> 通过对象形式对数据进行维护
+>
+> 通过React.Component原型上的setState方法进行修改
+
+代码：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    state = &#123;<span class="attr">isHot</span>: <span class="literal">true</span>&#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;  <span class="comment">//由内部的组件实例调用 所以this指向组件实例</span></span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">onClick</span>=<span class="string">&#123;this.demo&#125;</span>&gt;</span>今天天气&#123;this.state.isHot ? &#x27;炎热&#x27; : &#x27;凉爽&#x27;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    demo = <span class="function">() =&gt;</span> &#123;  <span class="comment">//箭头函数定义  内部的this指向外部词法域的this  所以指向组件实例(外部是个类 类的this指向类new出来的实例)</span></span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;<span class="attr">isHot</span>: !<span class="built_in">this</span>.state.isHot&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span>/&gt;</span></span>, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+补充：
+
+> * 类组件内部的函数一般都是作为回调函数来使用，为了控制函数内this的指向，所以一般定义箭头函数，使this指向组件实例，便于使用组件实例的属性
+>
+> * 组件内的标签事件被React进行了封装，名字统一变为大写字母开头(如onclick变为onClick)
+>
+> * 原型上的setState方法
+>
+>   > * 参数：(obj/func[, callback])
+>   >
+>   >   > 第一个参数可以是对象，也可以是函数
+>   >   > 如果是函数的话，函数有两个参数分别接受state和props对象，然后返回是更新的state对象
+>   >   >
+>   >   > 第二个参数可选，是回调函数，在状态更新完成后(即调用render后)调用此回调函数；setState是**异步更新**的
+>   >
+>   > * 总结
+>   >
+>   >   > setState分为两类：对象式和函数式，对象式类似于函数式的语法糖
+>   >
+>   > * 例子：
+>   >
+>   >   <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">state = &#123;<span class="attr">count</span>: <span class="number">0</span>&#125;; <span class="comment">//初始化state状态</span></span><br><span class="line">addCount = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(<span class="function">(<span class="params">state,props</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;state&#x27;</span>, state);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;props&#x27;</span>, props);</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="attr">count</span>: state.count+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//获取更新后的state值</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;nowState&#x27;</span>, <span class="built_in">this</span>.state, a);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;count&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span> &gt;</span>count: &#123;count&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.addCount&#125;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+>   >
+>   >   
+
+#### props
+
+作用：
+
+> 获取组件外部的数据
+
+使用：
+
+> 通过组件标签属性传递外部数据到组件，组件内部通过props属性获得，props属性是组件的实例属性
+>
+> 传递属性：
+>
+> * 传递少数数据。
+> * &#123;...对象&#125;批量传递数据。相当于第一种方法的语法糖 (注意这只在babel和React联合下才起作用，在正规的ES语法中...不能展开对象)
+>
+> 传递数据类型限制： (需要引入**prop-type库**，全局多了一个对象PropTypes)
+>
+> + 显示传递的数据类型和必须性 。通过类的静态属性propTypes
+> + 设置默认值 。通过类的静态属性defauletProps
+
+注意：React命名规范规定，如果props参数代表的是事件的监听，则最好命名为on[Event],对应的监听方法命名为handle[Event]
+
+代码:
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;  </span><br><span class="line">        <span class="keyword">let</span> &#123;a, b&#125; = <span class="built_in">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">                        <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;a&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                        <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;b&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">               <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">    	<span class="attr">a</span>: PropTypes.string,</span><br><span class="line">   	 	<span class="attr">b</span>: PropTypes.number</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">    	<span class="attr">b</span>: <span class="number">111</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = &#123;<span class="attr">a</span>:<span class="string">&#x27;1&#x27;</span>, <span class="attr">b</span>:<span class="string">&#x27;2&#x27;</span>&#125;;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span> &#123;<span class="attr">...p</span>&#125;/&gt;</span></span>, <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+补充：
+
+> 函数组件也有props，是以参数的形式接受的，同样可以给函数定义propTypes和defaultProps来限制传入的数据类型，但一般不怎么用
+>
+> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;data&#125; = props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span> 传递了&#123;data&#125; <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">MyComponent.propTypes = &#123;</span><br><span class="line">    <span class="attr">data</span>: PropTypes.number</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+>
+>    
+
+#### refs
+
+> 获取组件内的html标签，本身是对象
+
+获取标签
+
+* 通过字符串
+
+  > 通过标签的ref属性设置key，组件自动获取标签作为值
+  >
+  > <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&quot;input1&quot;</span> <span class="attr">onBlur</span>=<span class="string">&#123;this.showTip&#125;</span>  <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">showTip = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;input1&#125; = <span class="built_in">this</span>.refs;</span><br><span class="line">    <span class="built_in">console</span>.log(input1.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  >
+  >  
+
+* 通过回调函数
+
+  > 通过回调函数将标签绑定到实例的属性上(不在绑定到实例的refs中)
+  >
+  > <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input ref=&#123;ele=&gt;this.input1=ele&#125; onBlur=&#123;this.showTip&#125;  type=&quot;text&quot;/&gt;</span><br></pre></td></tr></table></figure>
+  >
+  >  
+
+* 通过React.createRef创建容器
+
+  > 自动获取标签绑定到React.creatRef创建的容器中(一个容器只能存储一个标签)
+  >
+  > <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">input1 = React.createRef();</span><br><span class="line">render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;this.input1&#125;</span> <span class="attr">onBlur</span>=<span class="string">&#123;this.showTip&#125;</span>  <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>/&gt;</span>&amp;nbs</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">showTip = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> input1 = <span class="built_in">this</span>.input1.current;</span><br><span class="line">    <span class="built_in">console</span>.log(input1.value, <span class="built_in">this</span>.input1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  >
+  >   
+
+  补充：
+
+  > * 三种方式中string方式不推荐使用
+  >
+  > * 不要过多的使用ref
+  >   1. 如果事件函数需要使用标签，可以通过target获取而不需要ref
+
+  
+
+# 数据的不可变性
+
+引言：
+
+> 一般改变数据有两种方式，一种是直接改变变量值，另外一种是用新的数据替代旧的数据；例子：
+>
+> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123;<span class="attr">a</span>: <span class="string">&#x27;a&#x27;</span>, <span class="attr">b</span>:<span class="string">&#x27;a&#x27;</span>&#125;;</span><br><span class="line">data.b = <span class="string">&#x27;b&#x27;</span> <span class="comment">// 直接改变变量值</span></span><br><span class="line"><span class="keyword">let</span> copy = <span class="built_in">Object</span>.assign(&#123;&#125;, data, &#123;<span class="attr">b</span>: <span class="string">&#x27;b&#x27;</span>&#125;) <span class="comment">// 替代旧数据</span></span><br><span class="line"><span class="comment">// 也可以简化为 copy = &#123;...data, b: &#x27;b&#x27;&#125; ES2018支持</span></span><br></pre></td></tr></table></figure>
+>
+>   
+
+应用：一般在React中改变对象数据时，需要保持数据不可变性，应用在state改变时
+
+不可变性优点：
+
+* 简化复杂功能的实现，如：回溯以前的状态等功能
+* 易于跟踪数据；直接通过===就可以判断数据是否改变，如React的*pure components*，通过===比较很容易的判断是否需要重新渲染组件[详细](https://zh-hans.reactjs.org/docs/optimizing-performance.html#examples)
+
+# 状态提升
+
+应用：
+
+> 当父组件需要子组件的state信息，这是可以状态提升，将子组件的状态提升到父组件
+
+# 组件内容
+
+组件可以像标签一样使用，组件标签的内容被自动添加为props的children属性
+
+例子
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MyNavLink组件是对NavLink组件的封装</span></span><br><span class="line">&lt;MyNavLink to=<span class="string">&quot;page2&quot;</span>&gt;Page2&lt;/MyNavLink&gt; </span><br><span class="line"><span class="comment">//在MyNavLink组件中通过props属性获得了标签体内容Page2</span></span><br><span class="line"><span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">NavLink</span> &#123;<span class="attr">...this.props</span>&#125;/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+补充：
+
+> A是B组件的父组件，书写的形式有两种
+>
+> 第一种:
+>
+> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//直接在A组件中书写使用&lt;B/&gt;</span><br></pre></td></tr></table></figure>
+>
+> 第二种：
+>
+> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//假设Demo组件中使用了A组件</span><br><span class="line">&lt;A&gt;</span><br><span class="line">	&lt;B/&gt;</span><br><span class="line">&lt;/A&gt;</span><br></pre></td></tr></table></figure>
+>
+> 
+
+**高级应用**：
+
+应用解释：
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//假设A组件是你写的组件，让其能显示外部传入的内容</span><br><span class="line">//当然可以用props获取外部数据，但外部传入的是<span class="emphasis">*组件*</span>而不是简单的数据</span><br><span class="line">//假设外部传入的组件是B</span><br><span class="line">//第二种方法的优点是可以使B获取A的状态</span><br><span class="line">//如果传入的组件只是简单的展示可以用第一种方法，但如果需要传入的组件根据A的状态进行相应的改变，则需要用第二种方法</span><br></pre></td></tr></table></figure>
+
+
+
+![image-20210502161146007](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210502161146007.png)
+
+例子：
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 第一种方法</span></span><br><span class="line">        <span class="comment">// &lt;div&gt;</span></span><br><span class="line">        <span class="comment">//     &lt;A &gt; &lt;B name=&quot;小高&quot;/&gt; &lt;/A&gt;</span></span><br><span class="line">        <span class="comment">// &lt;/div&gt;</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">// 第二种方法</span></span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                 <span class="tag">&lt;<span class="name">A</span> <span class="attr">render</span>=<span class="string">&#123;name</span>=&gt;</span><span class="tag">&lt;<span class="name">B</span> <span class="attr">data</span>=<span class="string">&#123;name&#125;/</span>&gt;</span>&#125;&gt; <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    state = &#123;<span class="attr">name</span>: <span class="string">&#x27;A&#x27;</span>&#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 第一种方法</span></span><br><span class="line">        <span class="comment">//  &#123;this.props.children&#125; </span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                A</span></span><br><span class="line"><span class="xml">                &#123;this.props.render(this.state.name)&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>B----&#123;this.props.data&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+# 组件懒加载
+
+> 一般用于路由组件，当点击相应的路由时在加载对应的路由组件
+
+步骤：
+
+* 从react包中引入lazy**函数**和Suspense组件
+
+* 通过lazy函数懒加载路由组件
+
+  > `**const** Page1 = lazy(()**=>**import('./pages/page1'));`
+
+* 利用Suspense将路由组件包裹
+
+  > 当路由组件没有加载完成时显示Suspense组件
+  >
+  > Suspense组件fallback属性接受一个**组件**(标签形式的组件而不是对象或函数)，用于显示加载中的UI
+
+例子:
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从react包中引入lazy和Suspense</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component,lazy,Suspense &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Loading <span class="keyword">from</span> <span class="string">&#x27;./component/Loading&#x27;</span>;</span><br><span class="line"><span class="comment">//懒加载路由组件</span></span><br><span class="line"><span class="keyword">const</span> Page1 = lazy(<span class="function">()=&gt;</span><span class="keyword">import</span>(<span class="string">&#x27;./pages/page1&#x27;</span>));</span><br><span class="line"><span class="keyword">const</span> Page2 = lazy(<span class="function">()=&gt;</span><span class="keyword">import</span>(<span class="string">&#x27;./pages/page2&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/page1&quot;</span>&gt;</span>page1<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/page2&quot;</span>&gt;</span>page2<span class="tag">&lt;/<span class="name">Link</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">Loading</span>/&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page1&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page1&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page2&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page2&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Suspense</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+# 组件通信
+
+有三个方向的通信：父组件向子组件传递信息，子组件向父组件传递信息以及兄弟组件之间的信息传递
+
+1. 父组件向子组件传递信息
+
+> 通过组件的props属性
+
+2. 子组件向父组件传递信息
+
+> 通过函数的参数
+>
+> * 父组件将数据的相应逻辑封装在函数中并传递给子组件
+> * 子组件通过props获得函数传入参数并调用
+
+3. 兄弟组件之间的传递
+
+> 通过消息订阅和发布机制
+>
+> * 首先引入消息订阅和发布的支持模块pubsub-js(通过node安装)
+>
+>   > `npm install pubsub-js`
+>
+> * 然后引入pubsub-js模块
+>
+>   > `import PubSub from 'pubsub-js'`或者
+>   >
+>   > `const PubSub = require('pubsub-js');`
+>
+> * 订阅发布信息
+>
+>   > 订阅信息：(在componentDidMount钩子函数中订阅)
+>   >
+>   > <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const mySubscriber = function (msg, data) &#123;</span><br><span class="line">    console.log( msg, data );</span><br><span class="line">&#125;;</span><br><span class="line">//MY TOPIC是特定的消息名字，用于获取对应的消息</span><br><span class="line">//返回值token类似id 用于消除订阅</span><br><span class="line">const token = PubSub.subscribe(&#x27;MY TOPIC&#x27;, mySubscriber); </span><br></pre></td></tr></table></figure>
+>   >
+>   > 发布消息
+>   >
+>   > <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//MY TOPIC是特定的消息名字</span><br><span class="line">//&#x27;hello world!&#x27;是消息的内容</span><br><span class="line">PubSub.publish(&#x27;MY TOPIC&#x27;, &#x27;hello world!&#x27;);</span><br></pre></td></tr></table></figure>
+>   >
+>   >  
+>
+> **注意**：需要在componentWillUnmount中取消订阅`PubSub.publishSync('MY TOPIC', 'hello world!');`
+>
+> 参考地址：
+>
+> > pubsubjs地址：(https://github.com/mroderick/PubSubJS)
+
+**实际上发布订阅模式使用于任何形式的信息传递，子传父和父传子都可以**
+
+例子：
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 访问github的头像和用户名信息</span></span><br><span class="line"><span class="comment">//地址(https://api.github.com/search/users?q=xxxx)</span></span><br><span class="line"><span class="comment">//省略了引入pubsub模块等信息，只挂出了关键代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*在App组件中引入两个模块，search和list分别用于搜索用户和显示用户*/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">Search</span>/&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">List</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*list组件订阅信息*/</span></span><br><span class="line"><span class="comment">//初始化状态</span></span><br><span class="line">state = &#123;</span><br><span class="line">    <span class="attr">persons</span>:[],</span><br><span class="line">    <span class="attr">token</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//组件挂载后立刻订阅信息</span></span><br><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> token = Pubsub.subscribe(<span class="string">&#x27;persons&#x27;</span> ,<span class="function">(<span class="params">_,data</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> persons = data.items;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;dy&#x27;</span>,persons);</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;token, persons&#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//组件卸载前取消订阅</span></span><br><span class="line"><span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Pubsub.publishSync(<span class="built_in">this</span>.state.token);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;persons&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;</span></span><br><span class="line"><span class="xml">                persons.map((v)=&gt;&#123;</span></span><br><span class="line"><span class="xml">                    return <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;v.id&#125;</span>&gt;</span>&#123;v.login&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                &#125;)</span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*serch发布信息*/</span></span><br><span class="line">searchName = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//按回车键后通过fetch向后端查找信息</span></span><br><span class="line">    <span class="keyword">if</span> (e.keyCode !== <span class="number">13</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">const</span> key = e.target.value;</span><br><span class="line">    fetch(<span class="string">`https://api.github.com/search/users?q=<span class="subst">$&#123;key&#125;</span>`</span>)</span><br><span class="line">        .then(<span class="function"><span class="params">res</span>=&gt;</span>res.json())</span><br><span class="line">        .then(<span class="function"><span class="params">data</span>=&gt;</span>Pubsub.publish(<span class="string">&#x27;persons&#x27;</span>,data))</span><br><span class="line">        .catch(<span class="function"><span class="params">err</span>=&gt;</span><span class="built_in">console</span>.log(<span class="string">&#x27;fetch请求出错&#x27;</span> ,err));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">onKeyUp</span>=<span class="string">&#123;this.searchName&#125;</span> <span class="attr">placeholder</span>=<span class="string">&quot;输入关键字回车搜索&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+**补充：**
+
+*利用Context可以方便的实现**祖组件**和**后代组件**之间的通信*
+
+![image-20210502140751164](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210502140751164.png)
+
+注意：
+
+* provider可以的value可以传递普通数据，也可以传递对象数据
+* provider包裹的组件及其后代组件都可以接受vlue中的值
+
+例子：
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MyContext = React.createContext();</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    state = &#123;<span class="attr">username</span>: <span class="string">&#x27;小王&#x27;</span>&#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;username&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是A组件，我的用户名：&#123;username&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">MyContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;username&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">B</span>/&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">MyContext.Provider</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是B组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">C</span>/&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">D</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//contextType方法获取值，仅适用于类组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> contextType = MyContext; <span class="comment">//声明接受context</span></span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是C组件，我接受A组件的用户名：&#123;this.context&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Consumer获取值，适用于函数和类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">D</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是D组件，我接受A组件的用户名：</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">MyContext.Consumer</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;v=&gt;v&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">MyContext.Consumer</span>&gt;</span>    </span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr> 
+
+# 组件优化
+
+Component组件的2个问题：
+
+> 1. 只要使用了setState(),即使不改变状态数据，组件也会重新render()  
+> 2. 父组件重新render会导致子组件也重新render，即使子组件没有任何的改变(即没有接受什么父组件的数据或接受的数据没有改变)
+
+![image-20210502150645207](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210502150645207.png)
+
+**PureComponent组件的注意点解释**
+
+> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const obj = this.state;</span><br><span class="line">obj.name = &#x27;小高&#x27;;</span><br><span class="line">this.setState(obj);</span><br><span class="line">//如果用PureComponent组件，则上述方式无法触发更新</span><br><span class="line">//因为是浅比较，obj和this.state是同一个引用，所以在shouldMountUpdate钩子中返回false，不会触发更新</span><br></pre></td></tr></table></figure>
+>
+>  
+
+*自己用shouldComponentUpdate简单模拟PureComponent组件：*
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    state = &#123;<span class="attr">name</span>: <span class="string">&#x27;小张&#x27;</span>&#125;</span><br><span class="line">    changeName = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;<span class="attr">name</span>: <span class="string">&#x27;小高&#x27;</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">Nextprops, nextState</span>)</span> &#123;</span><br><span class="line">        <span class="comment">//如果名字没有改变则不触发更新</span></span><br><span class="line">        <span class="keyword">return</span> !(nextState.name === <span class="built_in">this</span>.state.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;name&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Parent---render&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Parent的名字：&#123;name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">                &#123;/* 点击按钮后父组件更新而子组件由于没有改变不会更新 */&#125;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.changeName&#125;</span>&gt;</span>改名<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">Son</span> <span class="attr">name</span>=<span class="string">&quot;小丽&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">Nextprops</span>)</span> &#123;</span><br><span class="line">        <span class="comment">//如果props没有改变则不触发更新</span></span><br><span class="line">        <span class="keyword">return</span> !(Nextprops.name === <span class="built_in">this</span>.props.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Son---render&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Son的名字：&#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+# React事件绑定
+
+> 对原生事件进行了封装，事件名称和this指向等都发生了变化
+
+目的：
+
+> 提高兼容性
+
+事件绑定：
+
+> 为了避开DOM的操作，一般直接将事件函数绑定在标签上
+
+代码
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;this.submit&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">            用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            密码：    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;input提交&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">submit = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;触发了&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+# 受控组件和非受控组件
+
+> 即不同方式获取表单的输入值
+
+定义：
+
++ 非受控组件**即时**获取表单的输入；受控组件将表单的值存储在state中通过state获取
+
+非受控组件代码:
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;form onSubmit=&#123;this.submit&#125;&gt;</span><br><span class="line">            用户名：&lt;input ref=&#123;ele=&gt;this.username=ele&#125; type=&quot;text&quot;/&gt;</span><br><span class="line">            密码：  &lt;input ref=&#123;ele=&gt;this.password=ele&#125; type=&quot;text&quot;/&gt;</span><br><span class="line">            	   &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">submit = (e) =&gt; &#123;</span><br><span class="line">    const &#123;username,password&#125; = this;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    //通过ref即时获取表单的值</span><br><span class="line">    console.log(username.value,password.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+受控组件代码: (本质上是vue中的双向数据绑定)
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">state = &#123;&#125;;<span class="comment">//状态初始化</span></span><br><span class="line">saveFormData = <span class="function">(<span class="params">typeData</span>)=&gt;</span>&#123;  <span class="comment">//高阶函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123;[typeData]: e.target.value&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;this.submit&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">            用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">onChange</span>=<span class="string">&#123;this.saveFormData(</span>&#x27;<span class="attr">username</span>&#x27;)&#125; <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            密码：    <span class="tag">&lt;<span class="name">input</span> <span class="attr">onChange</span>=<span class="string">&#123;this.saveFormData(</span>&#x27;<span class="attr">password</span>&#x27;)&#125; <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">submit = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;username,password&#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    <span class="built_in">console</span>.log(username,password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+受控组件代码补充：
+
+> 高阶函数定义：
+>
+> * 接受参数有函数
+> * 返回值是函数
+>
+> 通过高阶函数的应用实现了一个函数绑定多个表单输入值
+>
+> 也可以有另外一种方式实现：
+>
+> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">state = &#123;&#125;;//状态初始化</span><br><span class="line">saveFormData = (typeData, e)=&gt;&#123; </span><br><span class="line">    this.setState(&#123;[typeData]: e.target.value&#125;);</span><br><span class="line">&#125;</span><br><span class="line">render() &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;form onSubmit=&#123;this.submit&#125;&gt;</span><br><span class="line">            用户名：&lt;input onChange=&#123;e=&gt;this.saveFormData(&#x27;username&#x27;,e)&#125; type=&quot;text&quot;/&gt;</span><br><span class="line">            密码： &lt;input onChange=&#123;e=&gt;this.saveFormData(&#x27;password&#x27;,e)&#125; type=&quot;text&quot;/&gt;</span><br><span class="line">            &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">submit = (e) =&gt; &#123;</span><br><span class="line">    const &#123;username,password&#125; = this.state;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    console.log(username,password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+>
+>    
+
+# React生命周期
+
+#### 旧的声明周期
+
+* ![image-20210425205425556](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210425205425556.png)
+
+总结：
+
+* ![image-20210425205625627](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210425205625627.png)
+
+* 一般主要使用的是三个生命周期钩子render、componentDidMount、componentWillUnmount
+
+#### 新的生命周期
+
+[图片原址](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+![image-20210426155832693](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210426155832693.png)
+
+
+
+
+
+**新旧生命周期比较：**
+
+> * 新的生命周期比旧的生命周期多了两个生命周期钩子函数(getDerivedStateFromProps、getSnapshotBeforeUpdate)，少了三个生命周期函数(componentWillMount、componentWillReceiveProps、componentWillUpdate三个will)
+>
+> * 新的生命周期拟废除三个will生命周期，但实际还可以用不过要加上unsafe_(因为在未来的React版本中，特别是启用异步渲染后，使用这些生命周期钩子可能会导致bug)
+
+# React脚手架
+
+#### 安装脚手架
+
+* **全局**安装脚手架命令  npm i -g create-react-app
+* 切换到相应的路径创建react项目  create-react-app react-staging
+* 进入创建的项目文件夹
+* 打开浏览器运行项目 npm start
+
+#### 脚手架各个文件介绍
+
+1. **整个工程目录：**
+
+三个文件夹+四个文件：
+
+![image-20210427151228386](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427151228386.png)
+
+> node_modules、public、src文件夹
+>
+> gitignore、package-lock.json、package.json、ReADME.md
+
+2. **public文件夹：**
+
+![image-20210427151602928](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427151602928.png)
+
+> favicon.ico：网页图标
+>
+> index.html: 主页面
+>
+> logo192.png：苹果手机添加到主屏幕上时的显示图标
+>
+> logo192/512.png:  用于应用加壳时的应用图标
+>
+> manifest.json: 应用加壳时的配置文件
+>
+> robots.txt: 爬虫信息描述
+
+index.html文件：
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;%PUBLIC_URL%/favicon.ico&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 开启理想视口，用于移动端适配 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1&quot;</span>/&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- 用于配置浏览器页签的颜色(仅支持旧的安卓手机浏览器) --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;theme-color&quot;</span> <span class="attr">content</span>=<span class="string">&quot;#000000&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 网站描述 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">&quot;description&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">&quot;Web site created using create-react-app&quot;</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 用于指定网页添加到苹果受手机主屏后的图标，仅支持苹果手机 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;apple-touch-icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;%PUBLIC_URL%/logo192.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 应用加壳的配置文件 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;manifest&quot;</span> <span class="attr">href</span>=<span class="string">&quot;%PUBLIC_URL%/manifest.json&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>React App<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 网页不支持script标签时显示 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>You need to enable JavaScript to run this app.<span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 组件挂载位置 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+3. **src文件**
+
+![image-20210427154231453](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427154231453.png)
+
+> App.css: App组件的样式文件
+>
+> App.js: App组件，挂载在index.html的root标签上
+>
+> App.text.js 测试App组件的
+>
+> index.css: 主页面index的样式文件
+>
+> index.js: webpack的入口文件
+>
+> log.svg: 主页面上旋转的React的图标
+>
+> reportWebVitals.js：页面性能记录
+>
+> setupTests.js: 组件测试
+
+index.js文件：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入各种React库和App组件</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.css&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> reportWebVitals <span class="keyword">from</span> <span class="string">&#x27;./reportWebVitals&#x27;</span>;</span><br><span class="line"><span class="comment">//渲染组件到页面</span></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  <span class="comment">//检测组件代码编写是否规范</span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">React.StrictMode</span>&gt;</span>  </span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">React.StrictMode</span>&gt;</span></span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">//性能检测</span></span><br><span class="line">reportWebVitals();</span><br></pre></td></tr></table></figure>
+
+4. **四个文件**
+
+![image-20210427155752276](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427155752276.png)
+
+> .gitgnore:  git仓库文件
+>
+> package.json: 包的说明文件
+>
+> README.md: 包的说明文档(readme)
+
+#### 简化脚手架
+
+> 不是在真正的项目开发环境中，我们不需要面面俱到的考虑所有情况，可以对脚手架相应的文件进行删减
+
+![image-20210427161239449](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427161239449.png)
+
+操作：
+
+> 删除public中所有的文件，新建主页面index.html
+>
+> 删除src中所有文件，新建App组件和index.js入口文件
+>
+> 配置index.js入口文件
+>
+> >  ![image-20210427162729594](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427162729594.png)
+> >
+> >  
+>
+> 配置App.js文件
+>
+> >  ![image-20210427164345474](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427164345474.png)
+> >
+> > 补充：`import React,&#123;Component&#125; from "react"` 因为在react库中，component对象也被暴露了所以才能直接在import中获取Component对象(模块语法)
+
+#### 脚手架中组件结构
+
+> React组件化编程，对于组件的存放位置、文件命名等的默认规范
+
+* 一般组件存放在src专门的components文件中
+* 路由组件存放在src专门的pages文件中
+* 每个组件都单独建立一个文件夹保存**对应的**文件
+* 组件内嵌套的组件如果**只作为此父组件的子组件**则单独创建一个文件夹保存在父组件的文件夹内
+* 组件命名方法：
+  1. 见名知意命名
+  2. 都命名为index.js (好处：可以省略组件名直接引入)
+* 组件文件可以用.jsx后缀和其他的js文件进行区分，实际的效果和.js文件相同
+
+组件位置：
+
+>  ![image-20210427181625128](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427181625128.png)
+
+组件引入：
+
+> *  ![image-20210427181646232](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427181646232.png)
+>
+>   js或jsx文件格式可以省略后缀.js或.jsx
+>
+> *  ![image-20210427181825105](C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210427181825105.png)
+>
+>   组件命名为index.js可以省略组件名
+
+#### 脚手架配置代理
+
+> 用于解决浏览器的跨域问题
+
+原理：
+
+> 将请求代理给其他服务器而不是通过浏览器进行请求，所以就没有了同源策略的限制，不会出现跨域问题
+
+说明：
+
+> 通过设置代理，下次请求时就直接请求代理服务器的地址，然后代理服务器在向真正的地址进行请求
+
+方法1：
+
+> 在package.json中追加如下配置
+>
+> <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;proxy&quot;</span>: <span class="string">&quot;http://localhost:5000&quot;</span></span><br></pre></td></tr></table></figure>
+>
+> 说明：5000端口的是真正的资源地址，ajax首先访问3000的代理服务器地址，代理服务器在请求5000的地址
+>
+> 优点：
+>
+> * 配置简单
+>
+> 缺点：
+>
+> * 只能代理一个地址
+> * 不能控制是否请求代理地址(即首先请求代理服务器，如果没有相应资源才请求代理位置)
+
+方法2：
+
+> * 在src下创建配置文件setupProxy.js
+> * 编写配置文件：
+>
+> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">&#x27;http-proxy-middleware&#x27;</span>);  <span class="comment">//引入相关的包，create-react-app已经在初始化的时候下载好了包，如果没有则需要手动下载包</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">app</span>)</span>&#123;</span><br><span class="line">	app.use(</span><br><span class="line">		proxy(<span class="string">&#x27;api1&#x27;</span>, &#123;</span><br><span class="line">			<span class="attr">target</span>: <span class="string">&#x27;http:localhost:5000&#x27;</span>, <span class="comment">//配置转发的目标位置</span></span><br><span class="line">			<span class="attr">changeOrigin</span>: <span class="literal">true</span>, </span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">				是否将请求域名转换为真正的域名</span></span><br><span class="line"><span class="comment">			*/</span></span><br><span class="line">			<span class="attr">pathRewrite</span>: &#123;<span class="string">&#x27;^/api1&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125; <span class="comment">//去除请求前缀</span></span><br><span class="line">		&#125;),</span><br><span class="line">		proxy(<span class="string">&#x27;api2&#x27;</span>, &#123;</span><br><span class="line">			<span class="attr">target</span>: <span class="string">&#x27;http:localhost:5001&#x27;</span>, <span class="comment">//配置转发的目标位置</span></span><br><span class="line">			<span class="attr">changeOrigin</span>: <span class="literal">true</span>, </span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">				是否将请求域名转换为真正的域名</span></span><br><span class="line"><span class="comment">			*/</span></span><br><span class="line">			<span class="attr">pathRewrite</span>: &#123;<span class="string">&#x27;^/api2&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125; <span class="comment">//去除请求前缀</span></span><br><span class="line">		&#125;)</span><br><span class="line">	)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+>
+>  优点：
+>
+> * 可以代理多个地址
+> * 可以控制是否请求代理地址(如果url加有api前缀则请求代理地址，否则请求代理服务器)
+>
+> 缺点：
+>
+> * 配置繁琐
+
+
+
+# React路由
+
+#### hsitory对象
+
+1. BOM的history对象介绍：
+
+> 作用：
+>
+> > 提供对浏览器历史记录的访问和**无跳转**修改
+>
+> 属性：
+>
+> > **length**：保存浏览器的历史记录个数
+> >
+> > **state**：获取当前页面的state**对象**(如果不是通过pushState添加的记录则state为null)
+>
+> 方法
+>
+> > **go()**
+> >
+> > > 在**历史记录**中向前或向后跳转，相对于现在的页面位置
+> > >
+> > > 参数：整数
+> > >
+> > > * 正数向前跳转
+> > > * 负数向后跳转
+> >
+> > **back()**
+> >
+> > >  在历史记录中向后跳转一页(等价于go(-1))
+> >
+> > **forward()**
+> >
+> > > 在历史记录中向前跳转一页(等价于go(1))
+> >
+> > **Html5中新增的两个方法**
+> >
+> > > **通过下述方法改变浏览器的url并不会立即触发浏览器对url的请求，即不会立刻刷新。当重新打开页面的时候会请求通过pushstate()添加的url的请求**
+> > >
+> > > pushState():
+> > > 
+> > > > 向浏览器中增加一个历史记录而不会触发跳转(仅仅只是址栏改变了)
+> > > >
+> > > > 参数：(state, title[, url])
+> > > >
+> > > > * state: 添加历史记录的state对象
+> > > > * title：新页面的标题，但所有浏览都忽略该值，可以传入空字符串，**防止将来对方法的更改**(不懂)
+> > > >
+> > > > * url：添加历史记录的url，必须和当前页面的url是相同域名的，可以是绝对地址也可以是相对地址，相对地址则相对于当前页面进行解析
+> > >>
+> > > > **注意：**通过state参数改变页面的hash不会触发hashchange事件
+> > >
+> > > replaceState()
+> > >
+> > > > 和pushState方法一样，但功能变为了修改当前页面的state
+> 
+>popstate事件
+> 
+>> 当同一个文档的history对象出现变化时，就会触发popstate事件
+> >
+> > **注意：**pushState和replaceState方法不会触发此事件，仅当用于点击回退和前进按钮或js调用了back、forward、go方法才会触发此方法
+> >
+> > 回调函数：event对象，可以通过事件对象的state获取当前页面的state对象
+
+#### hsah和history路由的区别
+
+* hash只能改变url的hash值，而history可以改变**同源**下的所有路径
+* history有state对象可以存储页面的相应信息(如滚动条的信息)
+* 重新打开浏览器会触发对通过pushState和replaceState方法添加的url地址的请求，可能后端并没有相应的url，会导致出错
+
+#### 自己创建history路由
+
+步骤：
+
+* 创建路由链接
+* 创建组件显示区域
+* 创建路由和组件的映射
+* 监听路由变化
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;a onclick=<span class="string">&quot;changeRoute(&#x27;/page1&#x27;)&quot;</span>&gt;page1&lt;/a&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onclick</span>=<span class="string">&quot;changeRoute(&#x27;/page2&#x27;)&quot;</span>&gt;</span>page2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">&lt;!-- 组件显示位置 --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// 编写路由链接</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="keyword">function</span> <span class="title">changeRoute</span> (<span class="params">url</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="built_in">console</span>.log(<span class="string">&#x27;1&#x27;</span>, url);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        history.pushState(<span class="literal">null</span>, <span class="string">&#x27;&#x27;</span>, url);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="comment">// return false; //禁止a标签的默认行为，既不跳转页面</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// 注册路由</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    Route = &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="string">&#x27;/page1&#x27;</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">            <span class="built_in">document</span>.querySelector(<span class="string">&#x27;h1&#x27;</span>).innerHTML= <span class="string">&#x27;page1&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="string">&#x27;/page2&#x27;</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">            <span class="built_in">document</span>.querySelector(<span class="string">&#x27;h1&#x27;</span>).innerHTML=<span class="string">&#x27;page2&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// 监听路由变化</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="keyword">function</span> <span class="title">router</span>(<span class="params"></span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">let</span> &#123;pathname&#125; = location;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="built_in">console</span>.log(pathname);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        Route[pathname] &amp;&amp; Route[pathname]();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">//当调用pushState方法是更新页面</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">//(因为pushState方法无法触发popstate事件)</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> push = history.pushState;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    history.pushState = <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="comment">// 通过apply调用原始的pushState方法，保证this和参数的正确</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> res = push.apply(<span class="built_in">this</span>, args);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        router();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">return</span> res;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="built_in">window</span>.addEventListener(<span class="string">&#x27;popstate&#x27;</span>, router);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+#### 简单路由的创建
+
+1. 下载react-router-dom路由支持库
+
+> `npm i react-router-dom`
+
+2. 从react-router-dom库中通过import引入Link、Route和BrowserRouter(或者HashRouter)组件
+3. 引入路由组件
+4. 路由器(BrowserRouter或HashRouter)包裹App组件，用于管理所有的路由
+
+> `<BrowserRouter> <App /> </BrowserRouter>`
+
+5. 编写路由链接
+
+> `<Link to="/page1" >Page1</Link>`
+>
+> to属性用于改变url
+
+6. 注册路由并指定路由显示的位置
+
+> `<Route path="/page1" component=&#123;Page1&#125; />`
+>
+> path属性用于指定路径  component用于指定对应路由应该渲染的组件
+
+代码：(只引入了关键代码)
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入Link和Route组件</span></span><br><span class="line"><span class="keyword">import</span> &#123; Link,Route &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span></span><br><span class="line"><span class="comment">//引入路由组件</span></span><br><span class="line"><span class="keyword">import</span> Page1 <span class="keyword">from</span> <span class="string">&#x27;./pages/Page1&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Page2 <span class="keyword">from</span> <span class="string">&#x27;./pages/Page2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    &#123;/* 编写路由链接 */&#125;</span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/page1&quot;</span> &gt;</span>Page1<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/page2&quot;</span> &gt;</span>Page2<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    &#123;/* 注册路由 */&#125;</span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page1&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page1&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page2&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page2&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+**注意：**
+
+> 组件分为路由组件和一般组件，路由组件用一个和components同级的pages文件夹保存，便于区分
+
+#### 路由相关组件
+
+所有的组件都需要从react-router-dom引入
+
+**Link**
+
+> 用于创建路由链接，本质上是a标签
+
+**NavLink**
+
+> 类似Link，不过多了一个ActiveClassName属性，当用于点击时自动添加类；默认添加active类，如果不是添加active类需要手动添加类名
+>
+> <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;NavLink to=<span class="string">&quot;/page1&quot;</span> &gt;Page1&lt;<span class="regexp">/NavLink&gt;  /</span><span class="regexp">/当点击此标签后，class自动加上active类</span></span><br></pre></td></tr></table></figure>
+>
+>     
+
+**Route**
+
+> 路由，由于匹配不同路径和组件的映射关系
+>
+> 关键属性**path**和**component**
+
+**HashRouter**
+
+> hash路由器，用于检测路由的变化并显示相应的组件
+
+**BrowserRouter**
+
+> 类似HashRouter  
+
+**Switch**
+
+> 单一路由匹配，提高效率
+>
+> 用Switch组件包裹路由后，每个路由只匹配一个组件，当找到这个组件后就不再向下查看了
+>
+> <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page1&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page1&#125;</span> /&gt;</span></span></span><br><span class="line">    &#123;<span class="comment">/* 渲染Page2组件，当page2路由匹配上page2后就不再向下查看了 */</span>&#125;</span><br><span class="line">	&#123;<span class="comment">/* 如果没有包裹Switch组件，则page2路由会渲染两个组件Page2和Page3 */</span>&#125;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;/page2&quot;</span> component=&#123;Page2&#125; /&gt;  </span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/page2&quot;</span> <span class="attr">component</span>=<span class="string">&#123;Page3&#125;</span> /&gt;</span></span></span><br><span class="line">&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
+>
+>     
+
+**withRouter**
+
+> 是函数不是组件
+>
+> 参数：组件
+>
+> 返回值：组件
+>
+> 作用：让一般组件拥有路由组件的三个属性history、location和match
+
+#### 路由组件和一般组件
+
+区别：
+
+* 路由组件由路由进行渲染，并传入三个主要props属性history、location和match；而普通组件由程序员传递props
+* 路由组件结构上存储在pages文件夹中和components分开存储
+
+#### 路由引起的样式丢失
+
+补充：
+
+> react-create-app包创建了一个服务器，用于模拟真实的开发环境。假设创建的服务器的地址是`http://localhost:3000`
+>
+> 访问此地址的资源时：
+>
+> * 默认public文件夹为根路径，即`http://localhost:3000/page2`即访问`public/page2`
+> * 如果资源没找到，则默认返回`public/index.html`文件
+
+问题：
+
+> 通过引入Browser路由器，当改变文件的资源路径后，可能导致在index.html页面中引入的样式地址错误
+>
+> 如：`<link rel="stylesheet" href="./css/index.css">`引入public文件夹下css文件夹中的css文件
+>
+> 但只是相对路径的引入，当浏览器访问 `http://localhost:3000/page2`时，由于没找到相应资源，则服务器返回index.html页面
+> 然后浏览器加载html页面，碰到link标签开始加载css资源，浏览器以为现在的index.html页面路径是page2，所以就会向地址`http://localhost:3000/page2/css/index.css`请求css资源，由于没有相应的文件，所以服务器返回index.html页面，导致了css样式的丢失
+
+解决：
+
+* 不同相对路径，去掉点，即`<link rel="stylesheet" href="/css/index.css">`(常用)
+
+* 使用%PUBLIC_URL%，即`<link rel="stylesheet" href="%PUBLIC_URL%/css/index.css">`
+
+  > 注意：这种方法只有在react脚手架中才有效
+
+* 使用HashRouter；因为hash路由不改变资源路径
+
+
+
+#### 模糊匹配和精准匹配
+
+概念:
+
+> 模糊匹配要求路由链接包含注册的路由，精准匹配要求路由链接和注册的路由完全相同
+
+例子：
+
+> `<NavLink to="/page1/a/b" >Page1</NavLink>` 和`<Route path="/page1" component=&#123;Page1&#125; />`
+>
+> 模糊路由可以匹配，精准不能匹配
+
+使用：
+
+> Route组件上加exact属性(boolean值，true便是精准匹配)
+>
+> <Route exact path="/page1" component=&#123;Page1&#125; />
+
+#### 路由的push和replace
+
+> 路由通过replaceState方法改变还是pushState方法改变
+
+使用：
+
+> 类似模糊和精准匹配
+>
+> Link组件上的replace属性(为true则是replace模式)
+
+#### 路由重定向
+
+概念：
+
+> 自动跳转到相应路由
+
+使用：
+
+> Redirect组件
+>
+> `<Redirect to="/page1"/>`
+
+#### 路由嵌套
+
+> 直接在子组件中创建路由链接和注册路由，需要注意的是路由链接需要带上上级的路径
+>
+>不能够开启精准匹配，因为精准匹配会导致错误
+
+#### 路由传参
+
+> 路由组件和一般组件不同，路由组件由路由器内部控制何时渲染，所以传递参数需要借助路由Route和Link组件
+
+三种方式：
+
+* **params传参**
+
+> 只能传递字符串类型数据，且将数据暴露在了地址栏
+>
+> 使用：
+>
+> * 路由链接**传参**：`<Link to='/test/tom/18'>详情</Link>`
+> * 注册路由**获取参数**：`<Route to='/test/:tom/:18' component=&#123;Test&#125;>详情</Route>`
+> * 接受参数：`this.props.match.params`  在Test组件内接受
+
+* **search传参**
+
+> 只能传递字符串类型数据，且将数据暴露在了地址栏
+>
+> 使用：
+>
+> * 路由链接传参：`<Link to='/test/?name=tom&age=18'>详情</Link>`
+> * 注册路由：`<Route to='/test' component=&#123;Test&#125;>详情</Route>` 不需要获取参数
+> * 接受参数：`this.props.location.search`  在Test组件内接受
+>
+> **注意：**获取的是urlencoded编码字符串，可以通过引入querystring库将其解析成对象形式数据
+>
+> > querystring主要方法：
+> >
+> > * stringify()  将对象转换成urlencoded编码
+> > * parse() 将urlencoded编码转换成对象
+
+* **state参数**
+
+> 可以传递对象等复杂类型数据，且没有暴露数据
+>
+> 使用：
+>
+> * 路由链接传参：`<Link to=&#123;&#123;pathname:'/test', state:&#123;name: 'tom', age: 18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</code><blockquote>
+<ul>
+<li>注册路由：<code>&lt;Route to=&#39;/test&#39; component=&#123;Test&#125;&gt;详情&lt;/Route&gt;</code> 不需要获取参数</li>
+<li>接受参数：<code>this.props.location.state</code>  在Test组件内接受</li>
+</ul>
+<p>注意：刷新页面后state参数仍然保留，因为保存在了浏览器location对象的state上</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>HashRouter如果通过state传递参数，则刷新后会丢失state数据，因为hash路由器没有state，所以state只是存储在自建的props对象中，刷新后重新执行js代码会都是数据</p>
+</blockquote>
+<h4 id="编程式路由"><a href="#编程式路由" class="headerlink" title="编程式路由"></a>编程式路由</h4><p>本质：</p>
+<blockquote>
+<p>通过路由组件props的history属性中的方法实现js操作路由改变</p>
+</blockquote>
+<p>方法：</p>
+<blockquote>
+<p>push、replace</p>
+</blockquote>
+<p>使用：</p>
+<blockquote>
+<p>可以实现三种形式的传参，具体方法和Link组件编写路由链接类似</p>
+</blockquote>
+<p>补充：</p>
+<blockquote>
+<p>go、goBack、goForward三个方法和浏览器hsitory的三个方法功能相同</p>
+</blockquote>
+<hr>
+
+
+
+<h1 id="错误边界"><a href="#错误边界" class="headerlink" title="错误边界"></a>错误边界</h1><blockquote>
+<p>检测后代组件的错误，并在后代组件出现错误的时候渲染替代组件，防止由于部分组件出现错误导致整个页面崩溃</p>
+</blockquote>
+<p><img "" class="lazyload placeholder" data-original="C:\Users\Maibenben\AppData\Roaming\Typora\typora-user-images\image-20210502184146709.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="image-20210502184146709"></p>
+<h1 id="React哲学"><a href="#React哲学" class="headerlink" title="React哲学"></a>React哲学</h1><blockquote>
+<p>官网地址(<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/thinking-in-react.html">https://zh-hans.reactjs.org/docs/thinking-in-react.html</a>)</p>
+</blockquote>
+<p>总结：</p>
+<ul>
+<li><p>首先通过设计的UI划分组件(可以和设计人员交流讨论，并参考设计人员photoshop的图层)</p>
+</li>
+<li><p>通过数据模型编写静态UI页面(将UI渲染和交互分开)。静态页面组件不能有state状态，因为state状态是用于交互的。<br>可以自上而下或自下而上编写组件，如果是编写复杂的应用则自下而上更加方便，因为方便<strong>查看效果</strong>，一步一步的逐渐看见应用的全貌</p>
+</li>
+<li><p>为交互做准备，确定<strong>最小</strong>的state状态和state的位置</p>
+</li>
+<li><p>添加反向数据流</p>
+</li>
+</ul>
+<h1 id="React项目实践"><a href="#React项目实践" class="headerlink" title="React项目实践"></a>React项目实践</h1><blockquote>
+<p>官方项目(<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/tutorial/tutorial.html">https://zh-hans.reactjs.org/tutorial/tutorial.html</a>)</p>
+<p>（非必须）尚硅谷项目(<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1i4411N7Qc?p=2&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1i4411N7Qc?p=2&amp;spm_id_from=pageDriver</a>)</p>
+</blockquote>
+
+      </div>
+      <div class="post-tags-categories">
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>John Doe</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/study_notes.github.io/2021/07/19/react笔记/" target="_blank" title="">https://zhang20110.github.io/study_notes.github.io/2021/07/19/react笔记/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/study_notes.github.io/medias/7.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/study_notes.github.io/2021/08/25/hello-world/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> Prev:
+        <div class="title-text">Hello World</div>
+      </div>
+      
+      <!-- <div class="content">
+        Welcome to Hexo! This is your very first post. Check documen
+      </div> -->
+    </a>
+  </div>
+
+
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-if="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-if="visible">
+      <div class="donate-box_close">
+        <i class="fa fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-if="tabActive === 'Alipay'">
+          <img src="/study_notes.github.io/medias/zfb.jpg" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-if="tabActive === 'WeChatpay'">
+          <img src="/study_notes.github.io/medias/wx.jpg" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/study_notes.github.io/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em; margin: 15px auto;"
+	class="animated bounceInUp">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,0.9);
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
+		background-color: #42b983;
+	}
+	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
+		color: #42b983;
+		border-color: #42b983;
+	}
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <!-- 文章详情页右侧目录 -->
+
+  <div class="toc-aside">
+    <div class="toc-main">
+      <div class="toc-aside-title">
+        <i class="fa fa-list-ul" aria-hidden="true"></i><span>catalog</span>
+        
+          <div class="toc-open-close">catalog</div>
+        
+      </div>
+      <div class="toc-content">
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+  <!-- js在scripts目录下的的toc.ejs里面 -->
+  
+
+  <script>
+    function openBtnClickFn () {
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    };
+    openBtnClickFn();
+    document.addEventListener('pjax:complete', function () {
+      openBtnClickFn();
+    })
+  </script>
+
+
+  
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/study_notes.github.io/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/study_notes.github.io/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fa fa-eye" aria-hidden="true"></i>Total visits：<span id="busuanzi_value_site_pv"></span> times
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fa fa-users" aria-hidden="true"></i>Number of visitors：<span id="busuanzi_value_site_uv"></span> people
+</span>
+
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-moon-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/study_notes.github.io/js/goTop.js"></script>
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/study_notes.github.io/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="tencent"
+  type="playlist"
+  id="8062553743"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='random'
+  preload='auto'
+  volume='0.7'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/study_notes.github.io/js/fancybox/jquery.fancybox.min.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/study_notes.github.io/js/ribbon.min.js"></script>
+    
+    
+    <script src="/study_notes.github.io/js/app.js" data-pjax></script>
+    
+    <!-- 文章目录所需js -->
+<link href="/study_notes.github.io/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/study_notes.github.io/js/tocbot/tocbot.min.js"></script>
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -80,
+    headingsOffset: -($(window).height() * 0.4 - 45),
+    positionFixedSelector: '.toc-main',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init(option);
+    
+  }
+
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+    }
+  });
+
+  
+</script>
+
+<style>
+.is-position-fixed {
+  position:sticky !important;
+  top: 74px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+/* .toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+} */
+</style> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/study_notes.github.io/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/study_notes.github.io/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+  <script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/study_notes.github.io/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+            // 返回false, 防止重复触发copy事件  
+            // return false;
+          }
+        })
+        //  监听 ctrl + c事件  
+        // $(document).unbind('keypress').bind('keypress', function (e) {
+        //   if (e.ctrlKey && e.keyCode == 67) {
+        //     doSomething();
+        //     // 返回false, 防止重复触发copy事件  
+        //     return false;
+        //   }
+        // })
+
+        // // 鼠标右键的复制事件  
+        // $(document).unbind('copy').bind('copy', function (e) {
+        //   doSomething();
+        // });
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+
+
+<!-- 图片懒加载 -->
+<script src="/study_notes.github.io/js/lazyload/lazyload@1.9.1.js"></script>
+<script data-pjax>
+  $(function () {
+    $("div.lazyload, img.lazyload, a.lazyload").lazyload(
+      {
+        effect: "show",
+        placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
+      }
+    );
+  });
+</script>
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+    
+        <!-- 弹幕所需的css和js -->
+        
+<!-- 具体js，请前往valine/script.ejs查看 -->
+
+        <script>
+  var requiredFields = '';
+  requiredFields = requiredFields.split(',');
+  comment_el = '.comment';
+  let looperValine = null;
+  load_valine = function () {
+    if ($(comment_el).length) {
+      var valine = new Valine({
+        el: '#vcomment',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        app_id: "",
+        app_key: "",
+        placeholder: "客官，说点什么吧",
+        avatar: "",
+        master: "",   //博主邮箱md5
+        tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+        friends: "",
+        metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
+        requiredFields: requiredFields,
+        enableQQ: true,
+      });
+      function debounce(fn) {
+        var timerID = null
+        return function () {
+          var arg = arguments[0]   //获取事件
+          if (timerID) {
+            clearTimeout(timerID)
+          }
+          timerID = setTimeout(function () {
+            fn(arg)              //事件传入函数
+          }, 200)
+        }
+      }
+      //查询评论 valine.Q('*').limit(7) -- 查询所有，限制7条, 下面的的代码是查询当前页面
+      var themeDanmu = eval('false');
+      var themeLoop = eval('false');
+      var themeLooperTime = '5000' || 5000;
+      var speed = '40' || 20;
+      var isBarrager = true;
+      if (themeDanmu == true) {
+        do_barrager();
+        if ($('.danmuBox').length <= 0) {
+          $('.navbar').append('<div class="danmuBox"><div class="danmuBtn open"><span class="danmuCircle"></span><span class="danmuText">弹幕</span></div></div>');
+        }
+        $('.danmuBtn').on('click', debounce(
+          function () {
+            if ($('.danmuBtn').hasClass('open')) {
+              $('.danmuBtn').removeClass('open')
+              clearInterval(looperValine);
+              $.fn.barrager.removeAll();
+            } else {
+              $('.danmuBtn').addClass("open");
+              do_barrager();
+            }
+          }
+        ))
+      }
+      function do_barrager() {
+        isBarrager && valine.Q(window.location.pathname).find().then(function (comments) {
+          // var num = 0; // 可以记录条数，循环调用的时候只取最新的评论放入弹幕中
+          var run_once = true;
+          var looper_time = themeLooperTime;
+          var total = comments.length;
+          // var looper = null;
+          var index = 0;
+          if (total > 0) {
+            barrager();
+          } else {
+            // 当评论数为0的时候，自动关闭弹幕
+            // $('.danmuBtn').removeClass('open');
+          }
+          function barrager() {
+            if (run_once) {
+              //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+              looperValine = setInterval(barrager, looper_time);
+              run_once = false;
+            }
+            var content = comments[index]._serverData.comment;
+            var email = comments[index]._serverData.mail;
+            var link = comments[index]._serverData.link;
+            var newcontent = content.substring(0, 50).replace(/<[^>]+>/g, "");
+            //发布一个弹幕
+            const item = {
+              img: `https://q1.qlogo.cn/g?b=qq&nk=${email}&s=640`, //图片 
+              info: newcontent, //文字 
+              href: link, //链接 
+              close: true, //显示关闭按钮 
+              speed: speed, //延迟,单位秒,默认6 
+              color: '#fff', //颜色,默认白色 
+              old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色
+            }
+            $('body').barrager(item);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+              clearInterval(looperValine);
+              if (themeLoop === true) {
+                setTimeout(function () {
+                  do_barrager();
+                }, 5000);
+              } else {
+                $('.danmuBtn').removeClass('open');
+              }
+              return false;
+            }
+
+          }
+        })
+      }
+    }
+  };
+  $(document).ready(load_valine);
+  document.addEventListener('pjax:send', function (e) {
+    
+  })
+  document.addEventListener('pjax:complete', function () {
+    load_valine();
+  });
+</script>
+    
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+	
+		<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+		<script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+		<script src="/study_notes.github.io/js/cursor/explosion.min.js"></script>
+	
+
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/study_notes.github.io/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
