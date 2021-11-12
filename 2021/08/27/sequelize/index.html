@@ -501,6 +501,9 @@
 </blockquote>
 <h1 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h1><p>就是select语句的应用</p>
 <h4 id="模型实例层面"><a href="#模型实例层面" class="headerlink" title="模型实例层面"></a>模型实例层面</h4><blockquote>
+<p>通过create、reload()等方法进行</p>
+</blockquote>
+<blockquote>
 <p>模型实例的增删改查都只针对某一行进行，因为实例实例代表的就是某一行。</p>
 </blockquote>
 <h4 id="表层面"><a href="#表层面" class="headerlink" title="表层面"></a>表层面</h4><blockquote>
@@ -510,6 +513,10 @@
 <li>attributes对应查询后返回的列名</li>
 <li>where对应查询的条件</li>
 </ul>
+<blockquote>
+<p>Finder方法就是会生成select语句的方法</p>
+<p>finder方法默认会讲返回的结果报包装成对应的sequelize实例，如果数据较多可能耗时较长，可以通过raw：true阻止这一行为，只返回简单的响应</p>
+</blockquote>
 
       </div>
       <div class="post-tags-categories">
@@ -540,6 +547,24 @@
 <div class="post-nav">
 
 
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/study_notes.github.io/medias/7.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/study_notes.github.io/2021/09/07/node%E7%AC%94%E8%AE%B0/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> Prev:
+        <div class="title-text">node笔记</div>
+      </div>
+      
+      <!-- <div class="content">
+        感悟
+node的异步主要是为了解决IO密集的情况，即如果某个程序的执行主要的时间是在等待IO的读取，则在IO读取文件的过
+      </div> -->
+    </a>
+  </div>
 
 
 
